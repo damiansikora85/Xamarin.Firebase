@@ -66,6 +66,10 @@ jobs:
     #- run: |
       # make bootstrap
       # make release
+      
+    - name: Install dependencies
+      run: nuget restore Xamarin.Plugin.Firebase.sln
+      
     - run: msbuild Demo/Demo.Android/Demo.Droid.csproj /t:PackageForAndroid /p:Configuration=Debug
 
     - name: Perform CodeQL Analysis
