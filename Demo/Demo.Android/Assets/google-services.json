@@ -1,0 +1,40 @@
+{
+    "project_info": {
+      "project_number": "171031463885",
+      "firebase_url": "https://xamarinfirebasedemo-d36dd-default-rtdb.europe-west1.firebasedatabase.app",
+      "project_id": "xamarinfirebasedemo-d36dd",
+      "storage_bucket": "xamarinfirebasedemo-d36dd.appspot.com"
+    },
+    "client": [
+      {
+        "client_info": {
+          "mobilesdk_app_id": "1:171031463885:android:658185ce47cc5fa5ade684",
+          "android_client_info": {
+            "package_name": "com.darktowerlab.firebasedemo"
+          }
+        },
+        "oauth_client": [
+          {
+            "client_id": "171031463885-9ke4gc84i83826vdjgaa77fjb0h3khe6.apps.googleusercontent.com",
+            "client_type": 3
+          }
+        ],
+        "api_key": [
+          {
+            "current_key": "AIzaSyD3aJ5CZFn8YLVnDbpPRGiMp0aMMRn11RQ"
+          }
+        ],
+        "services": {
+          "appinvite_service": {
+            "other_platform_oauth_client": [
+              {
+                "client_id": "171031463885-9ke4gc84i83826vdjgaa77fjb0h3khe6.apps.googleusercontent.com",
+                "client_type": 3
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "configuration_version": "1"
+  }
