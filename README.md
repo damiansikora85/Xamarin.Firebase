@@ -14,3 +14,5 @@ Firebase setup:
 Additional resources for setup
 * https://firebase.google.com/docs/android/setup
 * https://firebase.google.com/docs/ios/setup
+
+![example workflow](https://github.com/damiansikora85/Xamarin.Plugin.Firebase/actions/workflows/buid.yml/badge.svg)
