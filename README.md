@@ -15,4 +15,4 @@ Additional resources for setup
 * https://firebase.google.com/docs/android/setup
 * https://firebase.google.com/docs/ios/setup
 
-![example workflow](https://github.com/damiansikora85/Xamarin.Plugin.Firebase/actions/workflows/buid.yml/badge.svg)
+[![Build](https://github.com/damiansikora85/Xamarin.Plugin.Firebase/actions/workflows/build.yml/badge.svg?event=push)](https://github.com/damiansikora85/Xamarin.Plugin.Firebase/actions/workflows/build.yml)
