@@ -59,6 +59,7 @@ namespace FirebaseDemo.Pages.ViewModels
 
         private async Task ListStorage()
         {
+            Files.Clear();
             var result = await _firebaseStorage.ListFiles(FirebasePath);
             var files = new List<FirebaseFile>();
             foreach(var file in result)

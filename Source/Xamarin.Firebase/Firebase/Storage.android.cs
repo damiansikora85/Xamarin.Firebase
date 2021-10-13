@@ -97,7 +97,7 @@ namespace Xamarin.Plugin.Firebase
                 var files = data.Items.Select(item => item.Name);
                 tcs.SetResult(files);
             };
-            var storageRef = _firebaseStorage.GetReference("/");
+            var storageRef = _firebaseStorage.GetReference(path);
             storageRef.ListAll().AddOnSuccessListener(listener).AddOnFailureListener(listener);
             return tcs.Task;
         }
