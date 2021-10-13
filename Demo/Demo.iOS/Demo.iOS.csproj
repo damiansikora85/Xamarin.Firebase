@@ -137,12 +137,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\..\Source\Xamarin.Firebase.iOS\Xamarin.Firebase.iOS.csproj">
-      <Project>{b66cc190-946a-480b-a300-21b1f4517e70}</Project>
-      <Name>Xamarin.Firebase.iOS</Name>
-      <IsAppExtension>false</IsAppExtension>
-      <IsWatchApp>false</IsWatchApp>
-    </ProjectReference>
     <ProjectReference Include="..\Demo.Shared\Demo.csproj">
       <Project>{FA4AE342-6788-431E-8FC1-814725061EDB}</Project>
       <Name>Demo</Name>
