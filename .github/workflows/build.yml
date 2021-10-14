@@ -1,4 +1,4 @@
-name: Build Xamarin.Android demo app
+name: Build
 
 on: [push]
 
