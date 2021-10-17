@@ -1,20 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Xamarin.Firebase.Plugin.Model;
 
 namespace Xamarin.Plugin.Firebase
 {
     public partial class Storage : IFirebaseStorage
     {
-        //void Setup(IFirebaseCore firebaseCore) => SetupInternal()
-        public Task DownloadFileToLocalStorage(string filename) => DownloadFileToLocalStorageInternal(filename);
-        public Task DownloadFileToMemory(string filename) => DownloadFileToMemoryInternal(filename);
-        public Task UploadFile(byte[] data) => UploadFileInternal(data);
-        public Task UploadFile(System.IO.Stream stream) => UploadFileInternal(stream);
-        public Task UploadFile(string pathToLocalFile) => UploadFileInternal(pathToLocalFile);
+        public Task<string> DownloadFileToLocalStorage(string filename) => DownloadFileToLocalStorageInternal(filename);
+        public Task<byte[]> DownloadFileToMemory(string filename) => DownloadFileToMemoryInternal(filename);
+        public Task<long> UploadFile(string firebasePath, byte[] data) => UploadFileInternal(firebasePath, data);
+        public Task<long> UploadFile(string firebasePath, System.IO.Stream stream) => UploadFileInternal(firebasePath, stream);
+        public Task<long> UploadFile(string firebasePath, string pathToLocalFile) => UploadFileInternal(firebasePath, pathToLocalFile);
         public Task DeleteFile(string filename) => DeleteFileInternal(filename);
-        public Task<IEnumerable<string>> ListFiles(string path) => ListFilesInternal(path);
+        public Task<IEnumerable<FirebaseFile>> ListFiles(string path) => ListFilesInternal(path);
     }
 }

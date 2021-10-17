@@ -1,13 +1,13 @@
-﻿using Java.IO;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Android.App;
 using Firebase;
 using Firebase.Storage;
+using Java.IO;
+using System;
+using System.Collections.Generic;
 using System.Linq;
-using Android.Content;
-using Android.App;
+using System.Threading.Tasks;
+using Xamarin.Firebase.Plugin.Model;
+using static Firebase.Storage.UploadTask;
 
 namespace Xamarin.Plugin.Firebase
 {
@@ -21,14 +21,14 @@ namespace Xamarin.Plugin.Firebase
             _firebaseStorage = FirebaseStorage.GetInstance(app);
         }
 
-        private Task DownloadFileToLocalStorageInternal(string filename)
+        private Task<string> DownloadFileToLocalStorageInternal(string path)
         {
-            var tcs = new TaskCompletionSource<bool>();
+            var tcs = new TaskCompletionSource<string>();
 
-            var storageRef = _firebaseStorage.GetReference("/");
-
-            var pathReference = storageRef.Child(filename);
-            File localFile = File.CreateTempFile(filename, "db");
+            var pathReference = _firebaseStorage.GetReference(path);
+            var filename = System.IO.Path.GetFileNameWithoutExtension(path);
+            var ext = System.IO.Path.GetExtension(path);
+            File localFile = File.CreateTempFile(System.IO.Path.GetFileNameWithoutExtension(path), System.IO.Path.GetExtension(path));
             var listener = new FirebaseStorageListener<FileDownloadTask.TaskSnapshot>();
             listener.OnFailEvent += (sender, exception) =>
             {
@@ -36,20 +36,19 @@ namespace Xamarin.Plugin.Firebase
             };
             listener.OnSuccessEvent += (sender, snapshot) =>
             {
-                tcs.SetResult(true);
+                tcs.SetResult(localFile.Path);
             };
 
             pathReference.GetFile(localFile).AddOnSuccessListener(listener).AddOnFailureListener(listener);
             return tcs.Task;
         }
 
-        private Task DownloadFileToMemoryInternal(string filename)
+        private Task<byte[]> DownloadFileToMemoryInternal(string path)
         {
-            var tcs = new TaskCompletionSource<bool>();
+            var tcs = new TaskCompletionSource<byte[]>();
 
-            var storageRef = _firebaseStorage.GetReference("/");
+            var pathReference = _firebaseStorage.GetReference(path);
 
-            var pathReference = storageRef.Child(filename);
             var listener = new FirebaseStorageListenerByteArray();
             listener.OnFailEvent += (sender, exception) =>
             {
@@ -57,24 +56,36 @@ namespace Xamarin.Plugin.Firebase
             };
             listener.OnSuccessEvent += (sender, data) =>
             {
-                tcs.SetResult(true);
+                tcs.SetResult(data);
             };
 
             pathReference.GetBytes(1024 * 1024 * 10).AddOnSuccessListener(listener).AddOnFailureListener(listener);
             return tcs.Task;
         }
 
-        private Task UploadFileInternal(byte[] data)
+        private Task<long> UploadFileInternal(string firebasePath, byte[] data)
+        {
+            var tcs = new TaskCompletionSource<long>();
+            var listener = new FirebaseStorageListener<TaskSnapshot>();
+            listener.OnFailEvent += (sender, exception) =>
+            {
+                tcs.SetException(exception);
+            };
+            listener.OnSuccessEvent += (sender, result) =>
+            {
+                tcs.SetResult(result.BytesTransferred);
+            };
+            var pathReference = _firebaseStorage.GetReference(firebasePath);
+            pathReference.PutBytes(data).AddOnSuccessListener(listener).AddOnFailureListener(listener);
+            return tcs.Task;
+        }
+
+        private Task<long> UploadFileInternal(string firebasePath, System.IO.Stream stream)
         {
             throw new NotImplementedException();
         }
 
-        private Task UploadFileInternal(System.IO.Stream stream)
-        {
-            throw new NotImplementedException();
-        }
-
-        private Task UploadFileInternal(string pathToLocalFile)
+        private Task<long> UploadFileInternal(string firebasePath, string pathToLocalFile)
         {
             throw new NotImplementedException();
         }
@@ -84,9 +95,9 @@ namespace Xamarin.Plugin.Firebase
             throw new NotImplementedException();
         }
 
-        private Task<IEnumerable<string>> ListFilesInternal(string path)
+        private Task<IEnumerable<FirebaseFile>> ListFilesInternal(string path)
         {
-            var tcs = new TaskCompletionSource<IEnumerable<string>>();
+            var tcs = new TaskCompletionSource<IEnumerable<FirebaseFile>>();
             var listener = new FirebaseStorageListener<ListResult>();
             listener.OnFailEvent += (sender, exception) =>
             {
@@ -94,7 +105,7 @@ namespace Xamarin.Plugin.Firebase
             };
             listener.OnSuccessEvent += (sender, data) =>
             {
-                var files = data.Items.Select(item => item.Name);
+                var files = data.Items.Select(item => new FirebaseFile(item.Name, item.Path));
                 tcs.SetResult(files);
             };
             var storageRef = _firebaseStorage.GetReference(path);

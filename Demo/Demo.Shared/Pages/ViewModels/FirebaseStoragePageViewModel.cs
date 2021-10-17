@@ -49,24 +49,19 @@ namespace FirebaseDemo.Pages.ViewModels
 
         private async Task DownloadFileToLocalFile(FirebaseFile file)
         {
-            await _firebaseStorage.DownloadFileToLocalStorage(file.Filename);
+            await _firebaseStorage.DownloadFileToLocalStorage(file.Path);
         }
 
         private async Task DownloadFileToMemory(FirebaseFile file)
         {
-            await _firebaseStorage.DownloadFileToMemory(file.Filename);
+            await _firebaseStorage.DownloadFileToMemory(file.Path);
         }
 
         private async Task ListStorage()
         {
             Files.Clear();
             var result = await _firebaseStorage.ListFiles(FirebasePath);
-            var files = new List<FirebaseFile>();
-            foreach(var file in result)
-            {
-                files.Add(new FirebaseFile(file));
-            }
-            Files.AddRange(files);
+            Files.AddRange(result);
         }
 
         private void UploadFromLocalFile()

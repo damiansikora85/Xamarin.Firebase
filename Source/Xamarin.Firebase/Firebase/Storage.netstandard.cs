@@ -2,32 +2,33 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Firebase.Plugin.Model;
 
 namespace Xamarin.Plugin.Firebase
 {
     public partial class Storage
     {
-        private Task DownloadFileToLocalStorageInternal(string filename)
+        private Task<string> DownloadFileToLocalStorageInternal(string filename)
         {
             throw new NotImplementedException();
         }
 
-        private Task DownloadFileToMemoryInternal(string filename)
+        private Task<byte[]> DownloadFileToMemoryInternal(string filename)
         {
             throw new NotImplementedException();
         }
 
-        private Task UploadFileInternal(byte[] data)
+        private Task<long> UploadFileInternal(string firebasePath, byte[] data)
         {
             throw new NotImplementedException();
         }
 
-        private Task UploadFileInternal(System.IO.Stream stream)
+        private Task<long> UploadFileInternal(string firebasePath, System.IO.Stream stream)
         {
             throw new NotImplementedException();
         }
 
-        private Task UploadFileInternal(string pathToLocalFile)
+        private Task<long> UploadFileInternal(string firebasePath, string pathToLocalFile)
         {
             throw new NotImplementedException();
         }
@@ -37,7 +38,7 @@ namespace Xamarin.Plugin.Firebase
             throw new NotImplementedException();
         }
 
-        private Task<IEnumerable<string>> ListFilesInternal(string path)
+        private Task<IEnumerable<FirebaseFile>> ListFilesInternal(string path)
         {
             throw new NotImplementedException();
         }

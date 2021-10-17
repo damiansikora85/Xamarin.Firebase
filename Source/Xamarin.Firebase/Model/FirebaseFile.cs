@@ -6,11 +6,13 @@ namespace Xamarin.Firebase.Plugin.Model
 {
     public class FirebaseFile
     {
-        public FirebaseFile(string file)
+        public FirebaseFile(string file, string path)
         {
             Filename = file;
+            Path = path;
         }
 
         public string Filename { get; set; }
+        public string Path { get; set; }
     }
 }
