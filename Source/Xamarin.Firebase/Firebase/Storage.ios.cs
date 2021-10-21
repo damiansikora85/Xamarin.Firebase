@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Foundation;
+using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Firebase.Plugin.Model;
 
@@ -8,14 +9,43 @@ namespace Xamarin.Plugin.Firebase
 {
     public partial class Storage
     {
-        private Task<string> DownloadFileToLocalStorageInternal(string filename)
+        private Task<string> DownloadFileToLocalStorageInternal(string path)
         {
-            throw new NotImplementedException();
+            var tcs = new TaskCompletionSource<string>();
+            var pathReference = global::Firebase.Storage.Storage.DefaultInstance.GetReferenceFromPath(path);
+            var filename = System.IO.Path.GetFileName(path);
+            var destination = System.IO.Path.Combine(Environment.SpecialFolder.ApplicationData.ToString(), filename);
+            var fileUrl = new NSUrl(destination);
+            pathReference.WriteToFile(fileUrl, (url, error) =>
+            {
+                if (error != null)
+                {
+                    tcs.SetException(new Exception(error.Description));
+                }
+                else
+                {
+                    tcs.SetResult(url.AbsoluteString);
+                }
+            });
+            return tcs.Task;
         }
 
-        private Task<byte[]> DownloadFileToMemoryInternal(string filename)
+        private Task<byte[]> DownloadFileToMemoryInternal(string path)
         {
-            throw new NotImplementedException();
+            var tcs = new TaskCompletionSource<byte[]>();
+            var pathReference = global::Firebase.Storage.Storage.DefaultInstance.GetReferenceFromPath(path);
+            pathReference.GetData(1024 * 1024 * 10, (data, error) =>
+            {
+                if (error != null)
+                {
+                    tcs.SetException(new Exception(error.Description));
+                }
+                else
+                {
+                    tcs.SetResult(data.ToArray());
+                }
+            });
+            return tcs.Task;
         }
 
         private Task<long> UploadFileInternal(string firebasePath, byte[] data)
@@ -40,7 +70,20 @@ namespace Xamarin.Plugin.Firebase
 
         private Task<IEnumerable<FirebaseFile>> ListFilesInternal(string path)
         {
-            throw new NotImplementedException();
+            var tcs = new TaskCompletionSource<IEnumerable<FirebaseFile>>();
+            var pathReference = global::Firebase.Storage.Storage.DefaultInstance.GetReferenceFromPath(path);
+            pathReference.ListAll((result, error) =>
+            {
+                if (error != null)
+                {
+                    tcs.SetException(new Exception(error.Description));
+                }
+                else
+                {
+                    result.Items.Select(file => new FirebaseFile(file.Name, file.FullPath));
+                }
+            });
+            return tcs.Task;
         }
     }
 }
