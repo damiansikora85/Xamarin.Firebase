@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>171031463885-4ma15qg4l48ghi3cm819uqscg2mt5m4g.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.171031463885-4ma15qg4l48ghi3cm819uqscg2mt5m4g</string>
+	<key>API_KEY</key>
+	<string>AIzaSyByhZxlNLevJsQ_nhTTFbkwu4FaP7aiUOI</string>
+	<key>GCM_SENDER_ID</key>
+	<string>171031463885</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.darktowerlab.firebasedemo</string>
+	<key>PROJECT_ID</key>
+	<string>xamarinfirebasedemo-d36dd</string>
+	<key>STORAGE_BUCKET</key>
+	<string>xamarinfirebasedemo-d36dd.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:171031463885:ios:ed41a6946e93ef69ade684</string>
+	<key>DATABASE_URL</key>
+	<string>https://xamarinfirebasedemo-d36dd-default-rtdb.europe-west1.firebasedatabase.app</string>
+</dict>
+</plist>
