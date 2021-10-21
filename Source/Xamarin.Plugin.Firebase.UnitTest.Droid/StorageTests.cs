@@ -1,4 +1,7 @@
-﻿using NUnit.Framework;
+﻿using Android.Content;
+using Android.Content.Res;
+using NUnit.Framework;
+using NUnit.Framework.Internal;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,8 +12,9 @@ namespace Xamarin.Plugin.Firebase.UnitTest.Droid
     public class StorageTests
     {
         private Storage _firebaseStorage;
+
         [SetUp]
-        public void SEtup()
+        public void Setup()
         {
             _firebaseStorage = new Storage();
         }
@@ -46,7 +50,6 @@ namespace Xamarin.Plugin.Firebase.UnitTest.Droid
         [Test]
         public async Task CanUploadToFileFromByteArray()
         {
-            //using var stream = new MemoryStream();
             var data = Encoding.ASCII.GetBytes("1234567890");
             var transferedBytes = await _firebaseStorage.UploadFile("/test.dat", data);
             Assert.AreEqual(data.Length, transferedBytes);
@@ -55,19 +58,17 @@ namespace Xamarin.Plugin.Firebase.UnitTest.Droid
         [Test]
         public async Task CanUploadToFileFromStream()
         {
-            //using var stream = new MemoryStream();
             var data = Encoding.ASCII.GetBytes("1234567890");
-            var transferedBytes = await _firebaseStorage.UploadFile("/test.dat", data);
-            Assert.AreEqual(data.Length, transferedBytes);
+            var stream = new MemoryStream(data);
+            var transferedBytes = await _firebaseStorage.UploadFile("/test.dat", stream);
+            Assert.AreEqual(stream.Length, transferedBytes);
         }
 
         [Test]
         public async Task CanUploadToFileFromlocalStorage()
         {
-            //using var stream = new MemoryStream();
-            var data = Encoding.ASCII.GetBytes("1234567890");
-            var transferedBytes = await _firebaseStorage.UploadFile("/test.dat", data);
-            Assert.AreEqual(data.Length, transferedBytes);
+            var transferedBytes = await _firebaseStorage.UploadFile("/test.txt", "file:///android_asset/test.txt");
+            Assert.AreEqual(10, transferedBytes);
         }
     }
 }
