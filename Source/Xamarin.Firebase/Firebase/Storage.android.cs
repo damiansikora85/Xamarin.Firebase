@@ -1,8 +1,8 @@
 ﻿using Android.App;
+using Android.Net;
 using Firebase;
 using Firebase.Storage;
 using Java.IO;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -82,17 +82,42 @@ namespace Xamarin.Plugin.Firebase
 
         private Task<long> UploadFileInternal(string firebasePath, System.IO.Stream stream)
         {
-            throw new NotImplementedException();
+            var tcs = new TaskCompletionSource<long>();
+            var listener = new FirebaseStorageListener<TaskSnapshot>();
+            listener.OnFailEvent += (sender, exception) =>
+            {
+                tcs.SetException(exception);
+            };
+            listener.OnSuccessEvent += (sender, result) =>
+            {
+                tcs.SetResult(result.BytesTransferred);
+            };
+            var pathReference = _firebaseStorage.GetReference(firebasePath);
+            pathReference.PutStream(stream).AddOnSuccessListener(listener).AddOnFailureListener(listener);
+            return tcs.Task;
         }
 
         private Task<long> UploadFileInternal(string firebasePath, string pathToLocalFile)
         {
-            throw new NotImplementedException();
+            var tcs = new TaskCompletionSource<long>();
+            var listener = new FirebaseStorageListener<TaskSnapshot>();
+            listener.OnFailEvent += (sender, exception) =>
+            {
+                tcs.SetException(exception);
+            };
+            listener.OnSuccessEvent += (sender, result) =>
+            {
+                tcs.SetResult(result.BytesTransferred);
+            };
+            var uri = Uri.Parse(pathToLocalFile);
+            var pathReference = _firebaseStorage.GetReference(firebasePath);
+            pathReference.PutFile(uri).AddOnSuccessListener(listener).AddOnFailureListener(listener);
+            return tcs.Task;
         }
 
         private Task DeleteFileInternal(string filename)
         {
-            throw new NotImplementedException();
+            throw new System.NotImplementedException();
         }
 
         private Task<IEnumerable<FirebaseFile>> ListFilesInternal(string path)
