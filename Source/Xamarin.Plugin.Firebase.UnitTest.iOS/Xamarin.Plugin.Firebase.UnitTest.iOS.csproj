@@ -93,7 +93,6 @@
     <Compile Include="StorageTests.cs" />
     <Compile Include="TestClass.cs" />
     <None Include="Entitlements.plist" />
-    <None Include="GoogleService-Info.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <ITunesArtwork Include="iTunesArtwork" />
@@ -116,6 +115,7 @@
     <BundleResource Include="Resources\Icon-Small@2x.png" />
     <BundleResource Include="Resources\Icon-Small@3x.png" />
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
+    <BundleResource Include="GoogleService-Info.plist" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

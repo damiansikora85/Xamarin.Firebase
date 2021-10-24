@@ -69,7 +69,6 @@
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <None Include="Entitlements.plist" />
-    <None Include="GoogleService-Info.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -148,5 +147,12 @@
       <Project>{FA4AE342-6788-431E-8FC1-814725061EDB}</Project>
       <Name>Demo</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Source\Xamarin.Firebase\Xamarin.Plugin.Firebase.csproj">
+      <Project>{5CCA53A0-D271-4C2E-B3C1-2099CC250D3A}</Project>
+      <Name>Xamarin.Plugin.Firebase</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="GoogleService-Info.plist" />
   </ItemGroup>
 </Project>

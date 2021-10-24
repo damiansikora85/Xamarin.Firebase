@@ -80,7 +80,8 @@ namespace Xamarin.Plugin.Firebase
                 }
                 else
                 {
-                    result.Items.Select(file => new FirebaseFile(file.Name, file.FullPath));
+                    var files = result.Items.Select(file => new FirebaseFile(file.Name, file.FullPath));
+                    tcs.SetResult(files);
                 }
             });
             return tcs.Task;
