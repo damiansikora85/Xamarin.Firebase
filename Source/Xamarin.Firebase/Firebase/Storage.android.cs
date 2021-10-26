@@ -115,9 +115,10 @@ namespace Xamarin.Plugin.Firebase
             return tcs.Task;
         }
 
-        private Task DeleteFileInternal(string filename)
+        private async Task DeleteFileInternal(string path)
         {
-            throw new System.NotImplementedException();
+            var pathReference = _firebaseStorage.GetReference(path);
+            await pathReference.DeleteAsync();
         }
 
         private Task<IEnumerable<FirebaseFile>> ListFilesInternal(string path)
