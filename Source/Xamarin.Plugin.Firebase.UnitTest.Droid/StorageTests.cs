@@ -3,6 +3,7 @@ using Android.Content.Res;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -36,14 +37,14 @@ namespace Xamarin.Plugin.Firebase.UnitTest.Droid
         [Test]
         public async Task CanDownloadFileToMemory()
         {
-            var data = await _firebaseStorage.DownloadFileToMemory("/sqlite20210719.db");
+            var data = await _firebaseStorage.DownloadFileToMemory("/firebase.png");
             Assert.Greater(data.Length, 0);
         }
 
         [Test]
         public async Task CanDownloadFileToLocal()
         {
-            var path = await _firebaseStorage.DownloadFileToLocalStorage("/test/dashboard.json");
+            var path = await _firebaseStorage.DownloadFileToLocalStorage("/test/test.txt");
             Assert.IsTrue(System.IO.File.Exists(path));
         }
 
@@ -53,6 +54,7 @@ namespace Xamarin.Plugin.Firebase.UnitTest.Droid
             var data = Encoding.ASCII.GetBytes("1234567890");
             var transferedBytes = await _firebaseStorage.UploadFile("/test.dat", data);
             Assert.AreEqual(data.Length, transferedBytes);
+            await _firebaseStorage.DeleteFile("/test.dat");
         }
 
         [Test]
@@ -62,13 +64,31 @@ namespace Xamarin.Plugin.Firebase.UnitTest.Droid
             var stream = new MemoryStream(data);
             var transferedBytes = await _firebaseStorage.UploadFile("/test.dat", stream);
             Assert.AreEqual(stream.Length, transferedBytes);
+            await _firebaseStorage.DeleteFile("/test.dat");
         }
 
         [Test]
+        [Ignore("to do")]
         public async Task CanUploadToFileFromlocalStorage()
         {
             var transferedBytes = await _firebaseStorage.UploadFile("/test.txt", "file:///android_asset/test.txt");
             Assert.AreEqual(10, transferedBytes);
+        }
+
+        [Test]
+        public async Task CanDeleteFile()
+        {
+            var data = Encoding.ASCII.GetBytes("1234567890");
+            var stream = new MemoryStream(data);
+            var transferedBytes = await _firebaseStorage.UploadFile("/test.dat", stream);
+            var files = await _firebaseStorage.ListFiles("/");
+            var fileList = files.ToList();
+            Assert.IsNotNull(fileList.FirstOrDefault(file => file.Filename == "test.dat"));
+            await _firebaseStorage.DeleteFile("/test.dat");
+
+            files = await _firebaseStorage.ListFiles("/");
+            fileList = files.ToList();
+            Assert.IsNull(fileList.FirstOrDefault(file => file.Filename == "test.dat"));
         }
     }
 }

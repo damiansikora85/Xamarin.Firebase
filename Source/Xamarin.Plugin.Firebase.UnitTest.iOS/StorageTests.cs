@@ -33,14 +33,14 @@ namespace Xamarin.Plugin.Firebase.UnitTest.iOS
         [Test]
         public async Task CanDownloadFileToMemory()
         {
-            var data = await _firebaseStorage.DownloadFileToMemory("/sqlite20210719.db");
+            var data = await _firebaseStorage.DownloadFileToMemory("/firebase.png");
             Assert.Greater(data.Length, 0);
         }
 
         [Test]
         public async Task CanDownloadFileToLocal()
         {
-            var path = await _firebaseStorage.DownloadFileToLocalStorage("/test/dashboard.json");
+            var path = await _firebaseStorage.DownloadFileToLocalStorage("/test/test.txt");
             Assert.IsTrue(System.IO.File.Exists(path));
         }
 
