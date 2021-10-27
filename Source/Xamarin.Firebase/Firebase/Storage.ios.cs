@@ -49,23 +49,63 @@ namespace Xamarin.Plugin.Firebase
         }
 
         private Task<long> UploadFileInternal(string firebasePath, byte[] data)
-        {
-            throw new NotImplementedException();
+{
+            var tcs = new TaskCompletionSource<long>();
+            var pathReference = global::Firebase.Storage.Storage.DefaultInstance.GetReferenceFromPath(firebasePath);
+            pathReference.PutData(NSData.FromArray(data), null, (result, error) =>
+            {
+                if (error != null)
+                {
+                    tcs.SetException(new Exception(error.Description));
+                }
+                else
+                {
+                    tcs.SetResult(result.Size);
+                }
+            });
+            return tcs.Task;
         }
 
         private Task<long> UploadFileInternal(string firebasePath, System.IO.Stream stream)
         {
-            throw new NotImplementedException();
+            var tcs = new TaskCompletionSource<long>();
+            var pathReference = global::Firebase.Storage.Storage.DefaultInstance.GetReferenceFromPath(firebasePath);
+            pathReference.PutData(NSData.FromStream(stream), null, (result, error) =>
+            {
+                if (error != null)
+                {
+                    tcs.SetException(new Exception(error.Description));
+                }
+                else
+                {
+                    tcs.SetResult(result.Size);
+                }
+            });
+            return tcs.Task;
         }
 
         private Task<long> UploadFileInternal(string firebasePath, string pathToLocalFile)
         {
-            throw new NotImplementedException();
+            var tcs = new TaskCompletionSource<long>();
+            var pathReference = global::Firebase.Storage.Storage.DefaultInstance.GetReferenceFromPath(firebasePath);
+            pathReference.PutFile(new NSUrl(pathToLocalFile), null, (result, error) =>
+            {
+                if (error != null)
+                {
+                    tcs.SetException(new Exception(error.Description));
+                }
+                else
+                {
+                    tcs.SetResult(result.Size);
+                }
+            });
+            return tcs.Task;
         }
 
-        private Task DeleteFileInternal(string filename)
+        private async Task DeleteFileInternal(string firebasePath)
         {
-            throw new NotImplementedException();
+            var pathReference = global::Firebase.Storage.Storage.DefaultInstance.GetReferenceFromPath(firebasePath);
+            await pathReference.DeleteAsync();
         }
 
         private Task<IEnumerable<FirebaseFile>> ListFilesInternal(string path)
