@@ -26,6 +26,24 @@
     <!--Version of C# to use -->
     <LangVersion>default</LangVersion>
 
+    <PackageId>Xamarin.Plugin.Firebase</PackageId>
+    <PackageVersion>1.0.0</PackageVersion>
+
+    <PackageLicenseUrl>https://github.com/damiansikora85/Xamarin.Plugin.Firebase/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/damiansikora85/Xamarin.Plugin.Firebase</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/damiansikora85/Xamarin.Plugin.Firebase</RepositoryUrl>
+    <PackageReleaseNotes>RELEASE NOTES</PackageReleaseNotes>
+    <PackageIconUrl>ICON URL</PackageIconUrl>
+    <PackageTags>xamarin, xamarin.forms, firebase</PackageTags>
+
+    <Title>Xamarin.Plugin.Firebase</Title>
+    <Summary>Xamarin plugin for Google Firebase services</Summary>
+    <Description>Xamarin plugin for Google Firebase services</Description>
+
+    <Owners>Damian Sikora</Owners>
+    <Authors>Damian Sikora</Authors>
+    <Copyright>Copyright 2021</Copyright>
+
   </PropertyGroup>
 
   <!-- Define what happens on build and release -->
@@ -39,9 +57,8 @@
     <DebugType>pdbonly</DebugType>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
 
-    <!-- If we want a nuget package add this
+    <!-- If we want a nuget package add this -->
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-     -->
   </PropertyGroup>
 
   <ItemGroup>
