@@ -76,8 +76,6 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'MonoAndroid90'">
-    <PackageReference Include="Xamarin.Firebase.Auth" Version="121.0.1.1">
-    </PackageReference>
     <PackageReference Include="Xamarin.Firebase.Common" Version="120.0.0">
     </PackageReference>
     <PackageReference Include="Xamarin.Firebase.Core" Version="119.0.1">
@@ -89,8 +87,6 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'MonoAndroid10.0'">
-    <PackageReference Include="Xamarin.Firebase.Auth" Version="121.0.1.1">
-    </PackageReference>
     <PackageReference Include="Xamarin.Firebase.Common" Version="120.0.0">
     </PackageReference>
     <PackageReference Include="Xamarin.Firebase.Core" Version="119.0.1">
