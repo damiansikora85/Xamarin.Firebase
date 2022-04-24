@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Xamarin.Firebase.Plugin.Model
+namespace Xamarin.Plugin.Firebase
 {
     public class FirebaseUser
     {

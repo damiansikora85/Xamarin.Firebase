@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Xamarin.Firebase.Plugin
+namespace Xamarin.Plugin.Firebase
 {
     public interface IFirebaseCore
     {

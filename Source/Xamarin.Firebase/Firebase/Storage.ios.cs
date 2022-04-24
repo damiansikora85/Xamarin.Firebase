@@ -49,7 +49,7 @@ namespace Xamarin.Plugin.Firebase
         }
 
         private Task<long> UploadFileInternal(string firebasePath, byte[] data)
-{
+        {
             var tcs = new TaskCompletionSource<long>();
             var pathReference = global::Firebase.Storage.Storage.DefaultInstance.GetReferenceFromPath(firebasePath);
             pathReference.PutData(NSData.FromArray(data), null, (result, error) =>
