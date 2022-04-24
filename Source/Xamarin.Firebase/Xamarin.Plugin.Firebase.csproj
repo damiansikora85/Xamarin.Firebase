@@ -27,7 +27,7 @@
     <LangVersion>default</LangVersion>
 
     <PackageId>Xamarin.Plugin.Firebase</PackageId>
-    <PackageVersion>1.0.0</PackageVersion>
+    <PackageVersion>1.0.1</PackageVersion>
 
     <PackageLicenseUrl>https://github.com/damiansikora85/Xamarin.Plugin.Firebase/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/damiansikora85/Xamarin.Plugin.Firebase</PackageProjectUrl>
@@ -93,29 +93,22 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'MonoAndroid90'">
-    <PackageReference Include="Xamarin.Firebase.Common" Version="120.0.0">
-    </PackageReference>
-    <PackageReference Include="Xamarin.Firebase.Core" Version="119.0.1">
-    </PackageReference>
-    <PackageReference Include="Xamarin.Firebase.Storage" Version="119.2.2">
-    </PackageReference>
-    <PackageReference Include="Xamarin.GooglePlayServices.Base" Version="117.6.0">
-    </PackageReference>
+    <PackageReference Include="Xamarin.Firebase.Common" Version="120.0.0"/>
+    <PackageReference Include="Xamarin.Firebase.Core" Version="119.0.1"/>
+    <PackageReference Include="Xamarin.Firebase.Storage" Version="119.2.2"/>
+    <PackageReference Include="Xamarin.Firebase.Auth" Version="121.0.1.1"/>
+    <PackageReference Include="Xamarin.GooglePlayServices.Base" Version="117.6.0"/>
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'MonoAndroid10.0'">
-    <PackageReference Include="Xamarin.Firebase.Common" Version="120.0.0">
-    </PackageReference>
-    <PackageReference Include="Xamarin.Firebase.Core" Version="119.0.1">
-    </PackageReference>
-    <PackageReference Include="Xamarin.Firebase.Storage" Version="119.2.2">
-    </PackageReference>
-    <PackageReference Include="Xamarin.GooglePlayServices.Base" Version="117.6.0">
-    </PackageReference>
+    <PackageReference Include="Xamarin.Firebase.Common" Version="120.0.0"/>
+    <PackageReference Include="Xamarin.Firebase.Core" Version="119.0.1"/>
+    <PackageReference Include="Xamarin.Firebase.Storage" Version="119.2.2"/>
+    <PackageReference Include="Xamarin.Firebase.Auth" Version="121.0.1.1"/>
+    <PackageReference Include="Xamarin.GooglePlayServices.Base" Version="117.6.0"/>
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'Xamarin.iOS10'">
-    <PackageReference Include="Xamarin.Firebase.iOS.Storage" Version="3.9.1">
-    </PackageReference>
+    <PackageReference Include="Xamarin.Firebase.iOS.Storage" Version="3.9.1"/>
   </ItemGroup>
 </Project>
