@@ -19,7 +19,7 @@ jobs:
       run: dotnet workload install maui
 
     - name: Install dependencies
-      run: nuget restore Xamarin.Plugin.Firebase.sln
+      run: dotnet restore
 
     - name: Build
       run: dotnet build Demo/Demo.Maui/Demo.Maui.csproj -c Release -f net6.0-android
