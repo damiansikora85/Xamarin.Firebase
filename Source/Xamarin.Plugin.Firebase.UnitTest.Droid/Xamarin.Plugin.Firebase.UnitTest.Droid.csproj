@@ -23,7 +23,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
-    <TargetFrameworkVersion>v11.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v13.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

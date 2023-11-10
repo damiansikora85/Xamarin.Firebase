@@ -1,8 +1,8 @@
-﻿<Project Sdk="MSBuild.Sdk.Extras/3.0.38">
+﻿<Project Sdk="MSBuild.Sdk.Extras/3.0.44">
 
   <PropertyGroup>
     <!--To Multi-target you can do this-->
-    <TargetFrameworks>netstandard1.0;netstandard2.0;Xamarin.iOS10;MonoAndroid90;MonoAndroid10.0;</TargetFrameworks>
+    <TargetFrameworks>net6.0;net6.0-android33</TargetFrameworks>
 
     <!--Assembly and Namespace info -->
     <AssemblyName>Xamarin.Plugin.Firebase</AssemblyName>
@@ -27,14 +27,14 @@
     <LangVersion>default</LangVersion>
 
     <PackageId>Xamarin.Plugin.Firebase</PackageId>
-    <PackageVersion>1.0.1</PackageVersion>
+    <PackageVersion>2.0.0</PackageVersion>
 
     <PackageLicenseUrl>https://github.com/damiansikora85/Xamarin.Plugin.Firebase/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/damiansikora85/Xamarin.Plugin.Firebase</PackageProjectUrl>
     <RepositoryUrl>https://github.com/damiansikora85/Xamarin.Plugin.Firebase</RepositoryUrl>
     <PackageReleaseNotes>RELEASE NOTES</PackageReleaseNotes>
     <PackageIconUrl>ICON URL</PackageIconUrl>
-    <PackageTags>xamarin, xamarin.forms, firebase</PackageTags>
+    <PackageTags>maui, firebase</PackageTags>
 
     <Title>Xamarin.Plugin.Firebase</Title>
     <Summary>Xamarin plugin for Google Firebase services</Summary>
@@ -72,12 +72,12 @@
     <Compile Remove="Listeners\*.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition=" $(TargetFramework.StartsWith('netstandard')) ">
+   <ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
     <Compile Include="**\*.netstandard.cs" />
     <Compile Include="**\*.netstandard.*.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('net6.0-android')) ">
     <Compile Include="**\*.android.cs" />
     <Compile Include="Listeners\*.cs" />
     <!-- if you have resources add this
@@ -87,28 +87,12 @@
     -->
   </ItemGroup>
 
-  <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
-    <Compile Include="**\*.ios.cs" />
-    <Compile Remove="Listeners\*.cs" />
+  <ItemGroup Condition="'$(TargetFramework)' == 'net6.0-android33'">
+    <PackageReference Include="Xamarin.Firebase.Core" Version="121.1.1.4" />
+    <PackageReference Include="Xamarin.Firebase.Common" Version="120.3.3.2" />
+    <PackageReference Include="Xamarin.Firebase.Storage" Version="120.2.1.1" />
+    <PackageReference Include="Xamarin.Firebase.Auth" Version="121.1.0" />
+    <PackageReference Include="Xamarin.GooglePlayServices.Base" Version="118.2.0.2" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'MonoAndroid90'">
-    <PackageReference Include="Xamarin.Firebase.Common" Version="120.0.0"/>
-    <PackageReference Include="Xamarin.Firebase.Core" Version="119.0.1"/>
-    <PackageReference Include="Xamarin.Firebase.Storage" Version="119.2.2"/>
-    <PackageReference Include="Xamarin.Firebase.Auth" Version="121.0.1.1"/>
-    <PackageReference Include="Xamarin.GooglePlayServices.Base" Version="117.6.0"/>
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)' == 'MonoAndroid10.0'">
-    <PackageReference Include="Xamarin.Firebase.Common" Version="120.0.0"/>
-    <PackageReference Include="Xamarin.Firebase.Core" Version="119.0.1"/>
-    <PackageReference Include="Xamarin.Firebase.Storage" Version="119.2.2"/>
-    <PackageReference Include="Xamarin.Firebase.Auth" Version="121.0.1.1"/>
-    <PackageReference Include="Xamarin.GooglePlayServices.Base" Version="117.6.0"/>
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)' == 'Xamarin.iOS10'">
-    <PackageReference Include="Xamarin.Firebase.iOS.Storage" Version="3.9.1"/>
-  </ItemGroup>
 </Project>

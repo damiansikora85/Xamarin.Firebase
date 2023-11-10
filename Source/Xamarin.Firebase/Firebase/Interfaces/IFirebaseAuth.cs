@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Xamarin.Firebase.Plugin.Model;
 
 namespace Xamarin.Plugin.Firebase
 {

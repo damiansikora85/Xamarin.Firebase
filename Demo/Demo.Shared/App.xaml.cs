@@ -1,5 +1,4 @@
-﻿using Xamarin.Firebase.Plugin;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xamarin.Plugin.Firebase;
 
 namespace FirebaseDemo

@@ -1,11 +1,8 @@
 ﻿using MvvmHelpers;
 using MvvmHelpers.Commands;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Xamarin.Firebase.Plugin.Model;
 using Xamarin.Plugin.Firebase;
 
 namespace FirebaseDemo.Pages.ViewModels

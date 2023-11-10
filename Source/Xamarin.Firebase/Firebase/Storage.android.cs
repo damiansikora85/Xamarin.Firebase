@@ -2,12 +2,12 @@
 using Android.Net;
 using Firebase;
 using Firebase.Storage;
+//using Firebase.Storage;
 using Java.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Xamarin.Firebase.Plugin.Model;
-using static Firebase.Storage.UploadTask;
+//using static Firebase.Storage.UploadTask;
 
 namespace Xamarin.Plugin.Firebase
 {
@@ -25,21 +25,21 @@ namespace Xamarin.Plugin.Firebase
         {
             var tcs = new TaskCompletionSource<string>();
 
-            var pathReference = _firebaseStorage.GetReference(path);
+            //var pathReference = _firebaseStorage.GetReference(path);
             var filename = System.IO.Path.GetFileNameWithoutExtension(path);
             var ext = System.IO.Path.GetExtension(path);
             File localFile = File.CreateTempFile(System.IO.Path.GetFileNameWithoutExtension(path), System.IO.Path.GetExtension(path));
-            var listener = new FirebaseStorageListener<FileDownloadTask.TaskSnapshot>();
-            listener.OnFailEvent += (sender, exception) =>
-            {
-                tcs.SetException(exception);
-            };
-            listener.OnSuccessEvent += (sender, snapshot) =>
-            {
-                tcs.SetResult(localFile.Path);
-            };
+            //var listener = new FirebaseStorageListener<FileDownloadTask.TaskSnapshot>();
+            //listener.OnFailEvent += (sender, exception) =>
+            //{
+            //    tcs.SetException(exception);
+            //};
+            //listener.OnSuccessEvent += (sender, snapshot) =>
+            //{
+            //    tcs.SetResult(localFile.Path);
+            //};
 
-            pathReference.GetFile(localFile).AddOnSuccessListener(listener).AddOnFailureListener(listener);
+            //pathReference.GetFile(localFile).AddOnSuccessListener(listener).AddOnFailureListener(listener);
             return tcs.Task;
         }
 
@@ -47,7 +47,7 @@ namespace Xamarin.Plugin.Firebase
         {
             var tcs = new TaskCompletionSource<byte[]>();
 
-            var pathReference = _firebaseStorage.GetReference(path);
+            //var pathReference = _firebaseStorage.GetReference(path);
 
             var listener = new FirebaseStorageListenerByteArray();
             listener.OnFailEvent += (sender, exception) =>
@@ -59,66 +59,66 @@ namespace Xamarin.Plugin.Firebase
                 tcs.SetResult(data);
             };
 
-            pathReference.GetBytes(1024 * 1024 * 10).AddOnSuccessListener(listener).AddOnFailureListener(listener);
+            //pathReference.GetBytes(1024 * 1024 * 10).AddOnSuccessListener(listener).AddOnFailureListener(listener);
             return tcs.Task;
         }
 
         private Task<long> UploadFileInternal(string firebasePath, byte[] data)
         {
             var tcs = new TaskCompletionSource<long>();
-            var listener = new FirebaseStorageListener<TaskSnapshot>();
-            listener.OnFailEvent += (sender, exception) =>
-            {
-                tcs.SetException(exception);
-            };
-            listener.OnSuccessEvent += (sender, result) =>
-            {
-                tcs.SetResult(result.BytesTransferred);
-            };
-            var pathReference = _firebaseStorage.GetReference(firebasePath);
-            pathReference.PutBytes(data).AddOnSuccessListener(listener).AddOnFailureListener(listener);
+            //var listener = new FirebaseStorageListener<TaskSnapshot>();
+            //listener.OnFailEvent += (sender, exception) =>
+            //{
+            //    tcs.SetException(exception);
+            //};
+            //listener.OnSuccessEvent += (sender, result) =>
+            //{
+            //    tcs.SetResult(result.BytesTransferred);
+            //};
+            //var pathReference = _firebaseStorage.GetReference(firebasePath);
+            //pathReference.PutBytes(data).AddOnSuccessListener(listener).AddOnFailureListener(listener);
             return tcs.Task;
         }
 
         private Task<long> UploadFileInternal(string firebasePath, System.IO.Stream stream)
         {
             var tcs = new TaskCompletionSource<long>();
-            var listener = new FirebaseStorageListener<TaskSnapshot>();
-            listener.OnFailEvent += (sender, exception) =>
-            {
-                tcs.SetException(exception);
-            };
-            listener.OnSuccessEvent += (sender, result) =>
-            {
-                tcs.SetResult(result.BytesTransferred);
-            };
-            var pathReference = _firebaseStorage.GetReference(firebasePath);
-            pathReference.PutStream(stream).AddOnSuccessListener(listener).AddOnFailureListener(listener);
+            //var listener = new FirebaseStorageListener<TaskSnapshot>();
+            //listener.OnFailEvent += (sender, exception) =>
+            //{
+            //    tcs.SetException(exception);
+            //};
+            //listener.OnSuccessEvent += (sender, result) =>
+            //{
+            //    tcs.SetResult(result.BytesTransferred);
+            //};
+            //var pathReference = _firebaseStorage.GetReference(firebasePath);
+            //pathReference.PutStream(stream).AddOnSuccessListener(listener).AddOnFailureListener(listener);
             return tcs.Task;
         }
 
         private Task<long> UploadFileInternal(string firebasePath, string pathToLocalFile)
         {
             var tcs = new TaskCompletionSource<long>();
-            var listener = new FirebaseStorageListener<TaskSnapshot>();
-            listener.OnFailEvent += (sender, exception) =>
-            {
-                tcs.SetException(exception);
-            };
-            listener.OnSuccessEvent += (sender, result) =>
-            {
-                tcs.SetResult(result.BytesTransferred);
-            };
-            var uri = Uri.Parse(pathToLocalFile);
-            var pathReference = _firebaseStorage.GetReference(firebasePath);
-            pathReference.PutFile(uri).AddOnSuccessListener(listener).AddOnFailureListener(listener);
+            //var listener = new FirebaseStorageListener<TaskSnapshot>();
+            //listener.OnFailEvent += (sender, exception) =>
+            //{
+            //    tcs.SetException(exception);
+            //};
+            //listener.OnSuccessEvent += (sender, result) =>
+            //{
+            //    tcs.SetResult(result.BytesTransferred);
+            //};
+            //var uri = Uri.Parse(pathToLocalFile);
+            //var pathReference = _firebaseStorage.GetReference(firebasePath);
+            //pathReference.PutFile(uri).AddOnSuccessListener(listener).AddOnFailureListener(listener);
             return tcs.Task;
         }
 
         private async Task DeleteFileInternal(string path)
         {
-            var pathReference = _firebaseStorage.GetReference(path);
-            await pathReference.DeleteAsync();
+            //var pathReference = _firebaseStorage.GetReference(path);
+            //await pathReference.DeleteAsync();
         }
 
         private Task<IEnumerable<FirebaseFile>> ListFilesInternal(string path)
